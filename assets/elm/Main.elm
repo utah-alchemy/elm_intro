@@ -2,11 +2,14 @@ module Main exposing (..)
 
 import Html exposing (Html)
 import CoolApp.Page
-import CoolApp.Msg exposing (..)
+import CoolApp.Type exposing (..)
+import CoolApp.User
 
 
 type alias Model =
-    { name : String }
+    { user : Maybe User
+    , name : String
+    }
 
 
 main : Program Never Model Msg
@@ -21,7 +24,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { name = "" }, Cmd.none )
+    ( { user = Nothing, name = "" }, CoolApp.User.fetch )
 
 
 subscriptions : Model -> Sub Msg
@@ -38,7 +41,15 @@ update msg model =
         NameChanged name ->
             ( { model | name = name }, Cmd.none )
 
+        UserLoaded user ->
+            ( { model | user = Just user }, Cmd.none )
+
 
 view : Model -> Html Msg
 view model =
-    CoolApp.Page.render model.name
+    case model.user of
+        Nothing ->
+            Html.text "Loading ..."
+
+        Just user ->
+            CoolApp.Page.render user model.name

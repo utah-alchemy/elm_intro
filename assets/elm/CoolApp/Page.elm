@@ -3,23 +3,29 @@ module CoolApp.Page exposing (render)
 import Html exposing (Html, div, input, text, br)
 import Html.Attributes exposing (type_, class)
 import Html.Events exposing (onInput)
-import CoolApp.Msg exposing (..)
+import CoolApp.Type exposing (..)
 
 
-render : String -> Html Msg
-render name =
+render : User -> String -> Html Msg
+render user override =
     div [ class "cool-application" ]
         [ input [ type_ "text", onInput NameChanged ] []
         , br [] []
-        , displayText name
+        , override
+            |> displayName user
+            |> displayText
+            |> text
         ]
 
 
-displayText : String -> Html Msg
 displayText name =
-    case name of
+    "Hello " ++ name ++ "!"
+
+
+displayName user override =
+    case override of
         "" ->
-            text "Hello World!"
+            user.username
 
         name ->
-            text ("Hello " ++ name ++ "!")
+            name

@@ -2,10 +2,7 @@ module Main exposing (..)
 
 import Html exposing (Html)
 import CoolApp.Page
-
-
-type Msg
-    = Noop
+import CoolApp.Msg exposing (..)
 
 
 type alias Model =
@@ -38,7 +35,10 @@ update msg model =
         Noop ->
             ( model, Cmd.none )
 
+        NameChanged name ->
+            ( { model | name = name }, Cmd.none )
+
 
 view : Model -> Html Msg
 view model =
-    CoolApp.Page.render
+    CoolApp.Page.render model.name

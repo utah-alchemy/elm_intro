@@ -1,7 +1,7 @@
 module Main exposing (..)
 
-import Html exposing (text)
+import CoolApp.Page
 
 
 main =
-    text "Hello world"
+    CoolApp.Page.render

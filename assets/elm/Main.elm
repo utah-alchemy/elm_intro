@@ -1,9 +1,9 @@
 module Main exposing (..)
 
-import Html exposing (Html)
 import CoolApp.Page
 import CoolApp.Type exposing (..)
 import CoolApp.User
+import Html exposing (Html)
 
 
 type alias Model =

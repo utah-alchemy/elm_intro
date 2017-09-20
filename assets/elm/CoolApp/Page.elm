@@ -1,9 +1,9 @@
 module CoolApp.Page exposing (render)
 
-import Html exposing (Html, div, input, text, br)
-import Html.Attributes exposing (type_, class)
-import Html.Events exposing (onInput)
 import CoolApp.Type exposing (..)
+import Html exposing (Html, br, div, input, text)
+import Html.Attributes exposing (class, type_)
+import Html.Events exposing (onInput)
 
 
 render : User -> String -> Html Msg
@@ -25,7 +25,17 @@ displayText name =
 displayName user override =
     case override of
         "" ->
-            user.username
+            getUserOrEmail user
 
         name ->
             name
+
+
+getUserOrEmail : User -> String
+getUserOrEmail user =
+    case user.username of
+        Nothing ->
+            user.email
+
+        Just username ->
+            username

@@ -3,7 +3,7 @@ module CoolApp.Type exposing (..)
 
 type alias User =
     { email : String
-    , username : String
+    , username : Maybe String
     }
 
 

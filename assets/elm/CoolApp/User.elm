@@ -8,9 +8,9 @@ fetch =
     let
         fetchedUser =
             { email = "fake@example.com"
-            , username = "ExampleUser"
+            , username = Nothing
             }
     in
-        fetchedUser
-            |> Task.succeed
-            |> Task.perform UserLoaded
+    fetchedUser
+        |> Task.succeed
+        |> Task.perform UserLoaded
